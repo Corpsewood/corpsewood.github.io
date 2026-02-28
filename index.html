@@ -83,6 +83,38 @@
         margin-top: 10px;
         font-size: 1.1em;
     }
+
+    /* Bottom link as a box */
+    .bottom-box-container {
+        margin-top: 500px; /* WAY further down */
+    }
+
+    .bottom-box-link {
+        text-decoration: none;
+    }
+
+    .bottom-box {
+        width: 150px;
+        height: 150px;
+        background-color: #1a1a1a;
+        border: 2px solid #ffffff; /* white border */
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        color: #ffffff;
+        font-size: 1em;
+    }
+
+    .bottom-box:hover {
+        transform: scale(1.05);
+        background-color: #222;
+        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
+    }
     </style>
 </head>
 <body>
@@ -110,11 +142,12 @@
         </div>
     </div>
 
-    <!-- Bottom link -->
-    <div style="margin-top: 50px;">
-        <a href="https://corpsewood.github.io/Corpsewood/" 
-           style="color: #4caf50; text-decoration: underline; font-size: 1em;">
-            Back to Corpsewood
+    <!-- Bottom "Back to Corpsewood" box -->
+    <div class="bottom-box-container">
+        <a class="bottom-box-link" href="https://corpsewood.github.io/Corpsewood/">
+            <div class="bottom-box">
+                Back to Corpsewood
+            </div>
         </a>
     </div>
 </body>
