@@ -51,7 +51,7 @@
         width: 150px;
         height: 150px;
         background-color: #1a1a1a;
-        border: 2px solid #4caf50;
+        border: 2px solid #ffffff; /* changed from green to white */
         border-radius: 10px;
         display: flex;
         align-items: center;
@@ -71,12 +71,12 @@
     .box:hover {
         transform: scale(1.05);
         background-color: #222;
-        box-shadow: 0 8px 16px rgba(0, 255, 100, 0.5);
+        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
     }
 
     .box:hover img {
         transform: scale(1.1);
-        box-shadow: 0 4px 12px rgba(0, 255, 100, 0.6);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
     }
 
     .box-text {
@@ -84,36 +84,15 @@
         font-size: 1.1em;
     }
 
-    /* Bottom link as a box */
-    .bottom-box-container {
-        margin-top: 500px; /* WAY further down */
-    }
-
-    .bottom-box-link {
-        text-decoration: none;
-    }
-
-    .bottom-box {
-        width: 150px;
-        height: 150px;
-        background-color: #1a1a1a;
-        border: 2px solid #ffffff; /* white border */
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        color: #ffffff;
+    /* Bottom link style */
+    .bottom-link {
+        margin-top: 700px; /* WAY further down */
         font-size: 1em;
     }
 
-    .bottom-box:hover {
-        transform: scale(1.05);
-        background-color: #222;
-        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
+    .bottom-link a {
+        color: #ffffff; /* make link white */
+        text-decoration: underline;
     }
     </style>
 </head>
@@ -142,13 +121,9 @@
         </div>
     </div>
 
-    <!-- Bottom "Back to Corpsewood" box -->
-    <div class="bottom-box-container">
-        <a class="bottom-box-link" href="https://corpsewood.github.io/Corpsewood/">
-            <div class="bottom-box">
-                Back to Corpsewood
-            </div>
-        </a>
+    <!-- Bottom link -->
+    <div class="bottom-link">
+        <a href="https://corpsewood.github.io/Corpsewood/">Back to Corpsewood</a>
     </div>
 </body>
 </html>
