@@ -20,7 +20,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
 
-    /* Moving stripes + subtle radial glow */
     background-image: 
         repeating-linear-gradient(
             45deg,
@@ -151,15 +150,25 @@ h1 { font-size: 2.5em; margin-bottom: 50px; }
 </div>
 
 <!-- Ambient Sound -->
-<audio autoplay loop>
+<audio id="ambientSound" autoplay loop>
     <source src="dragon-studio-creepy-industrial-sounds-ambience-482892.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
 </audio>
 
 <script>
-// Optional: subtle volume control
-const ambient = document.querySelector('audio');
-ambient.volume = 0.7; // adjust from 0.0 (silent) to 1.0 (full)
+// Smooth fade-in for ambient sound
+const ambient = document.getElementById('ambientSound');
+ambient.volume = 0; // start silent
+ambient.play().then(() => {
+    let vol = 0;
+    const fadeIn = setInterval(() => {
+        if(vol < 0.2){
+            vol += 0.01;
+            ambient.volume = vol;
+        } else {
+            clearInterval(fadeIn);
+        }
+    }, 100); // ~2 seconds fade-in
+});
 </script>
 </body>
 </html>
