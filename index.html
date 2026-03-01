@@ -20,7 +20,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
 
-    /* Moving stripes + subtle gradient glow */
+    /* Moving stripes + subtle radial glow */
     background-image: 
         repeating-linear-gradient(
             45deg,
@@ -149,5 +149,17 @@ h1 { font-size: 2.5em; margin-bottom: 50px; }
 <div class="bottom-link">
     <a href="https://corpsewood.github.io/Corpsewood/" tabindex="0">Back to Corpsewood</a>
 </div>
+
+<!-- Ambient Sound -->
+<audio autoplay loop>
+    <source src="dragon-studio-creepy-industrial-sounds-ambience-482892.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+// Optional: subtle volume control
+const ambient = document.querySelector('audio');
+ambient.volume = 0.2; // adjust from 0.0 (silent) to 1.0 (full)
+</script>
 </body>
 </html>
