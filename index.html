@@ -1,155 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Corpsewood File Dump</title>
+<meta charset="UTF-8">
+<title>Corpsewood File Dump</title>
 
-    <!-- Load your TTF font -->
-    <style>
-    @font-face {
-        font-family: "ComicSans";
-        src: url("Comic Sans MS 400.ttf") format("truetype");
-    }
+<style>
+@font-face {
+    font-family: "ComicSans";
+    src: url("Comic Sans MS 400.ttf") format("truetype");
+}
 
-    /* Smooth page fade-in */
-    body {
-        font-family: "ComicSans", sans-serif;
-        background-color: #121212;
-        color: #ffffff;
-        text-align: center;
-        margin: 0;
-        padding: 50px;
+body {
+    font-family: "ComicSans", sans-serif;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-
-        background-image: repeating-linear-gradient(
+    /* Moving stripes + subtle gradient glow */
+    background-image: 
+        repeating-linear-gradient(
             45deg,
-            #1a1a1a 0px,
-            #1a1a1a 10px,
-            #333 10px,
-            #333 20px
-        );
+            #222 0px,
+            #222 10px,
+            #444 10px,
+            #444 20px
+        ),
+        radial-gradient(circle at center, rgba(255,255,255,0.06), transparent 70%);
+    background-blend-mode: overlay;
+    background-size: cover;
+    animation: fadeIn 0.8s ease-in-out, moveBackground 30s linear infinite;
+    transition: background 0.3s ease-in-out;
+}
 
-        animation: fadeIn 0.8s ease-in-out;
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+@keyframes moveBackground {
+    0% { background-position: 0 0, center; }
+    100% { background-position: 0 400px, center; }
+}
 
-    h1 {
-        font-size: 2.5em;
-        margin-bottom: 50px;
-    }
+h1 { font-size: 2.5em; margin-bottom: 50px; }
 
-    .box-container {
-        display: flex;
-        justify-content: center;
-        gap: 50px;
-        margin-top: 30px;
-        flex-wrap: wrap;
-    }
+.box-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
 
-    .box-link {
-        text-decoration: none;
-        color: #ffffff;
-    }
+.box-link { text-decoration: none; color: #ffffff; }
 
-    .box {
-        width: 150px;
-        height: 150px;
-        max-width: 40vw;
-        max-height: 40vw;
-        background-color: #1a1a1a;
-        border: 2px solid #ffffff;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
+.box {
+    width: 150px;
+    height: 150px;
+    max-width: 40vw;
+    max-height: 40vw;
+    background-color: #1a1a1a;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    outline: none;
+}
 
-    .box img {
-        max-width: 100%;
-        max-height: 100%;
-        border-radius: 8px;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
+.box img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    /* Hover effect: scale + glow + green outline */
-    .box:hover {
-        transform: scale(1.05);
-        background-color: #222;
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-        border-color: #00ff00; /* Green outline on hover */
-    }
+.box:hover {
+    transform: scale(1.05);
+    background-color: #222;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    border-color: #00ff00;
+}
 
-    .box:hover img {
-        transform: scale(1.1);
-        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
-    }
+.box:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255,255,255,0.6);
+}
 
-    .box-text {
-        margin-top: 10px;
-        font-size: 1.1em;
-    }
+.box-text { margin-top: 10px; font-size: 1.1em; }
 
-    /* Bottom link style */
-    .bottom-link {
-        margin-top: auto;
-        padding-top: 40px;
-        font-size: 1em;
-    }
+.bottom-link {
+    margin-top: auto;
+    padding-top: 40px;
+    font-size: 1em;
+}
 
-    .bottom-link a {
-        color: #ffffff;
-        text-decoration: underline;
-    }
-    </style>
+.bottom-link a {
+    color: #ffffff;
+    text-decoration: underline;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.bottom-link a:hover {
+    color: #00ff00;
+    text-shadow: 0 0 8px #00ff00, 0 0 16px #00ff00;
+}
+</style>
 </head>
 <body>
-    <h1>Welcome to the file dump user called "345s"</h1>
+<h1>Welcome to the file dump user called "345s"</h1>
 
-    <div class="box-container">
-        <!-- FunnyGame Box -->
-        <div>
-            <a class="box-link" href="https://corpsewood.github.io/FunnyGames/">
-                <div class="box">
-                    <img src="345s.png" alt="Open FunnyGame page">
-                </div>
-            </a>
-            <div class="box-text">FunnyGame</div>
-        </div>
-
-        <!-- Contact Box -->
-        <div>
-            <a class="box-link" href="https://corpsewood.github.io/message/">
-                <div class="box">
-                    <img src="message.png" alt="Open Contact page">
-                </div>
-            </a>
-            <div class="box-text">Contact</div>
-        </div>
-
-        <!-- xhsx Box -->
-        <div>
-            <a class="box-link" href="https://corpsewood.github.io/xhsx/">
-                <div class="box">
-                    <img src="xhsx.png" alt="Open xhsx page">
-                </div>
-            </a>
-            <div class="box-text">xhsx</div>
-        </div>
+<div class="box-container">
+    <div>
+        <a class="box-link" href="https://corpsewood.github.io/FunnyGames/">
+            <div class="box" tabindex="0">
+                <img src="345s.png" alt="Open FunnyGame page">
+            </div>
+        </a>
+        <div class="box-text">FunnyGame</div>
     </div>
 
-    <!-- Bottom link -->
-    <div class="bottom-link">
-        <a href="https://corpsewood.github.io/Corpsewood/">Back to Corpsewood</a>
+    <div>
+        <a class="box-link" href="https://corpsewood.github.io/message/">
+            <div class="box" tabindex="0">
+                <img src="message.png" alt="Open Contact page">
+            </div>
+        </a>
+        <div class="box-text">Contact</div>
     </div>
+
+    <div>
+        <a class="box-link" href="https://corpsewood.github.io/xhsx/">
+            <div class="box" tabindex="0">
+                <img src="xhsx.png" alt="Open xhsx page">
+            </div>
+        </a>
+        <div class="box-text">xhsx</div>
+    </div>
+</div>
+
+<div class="bottom-link">
+    <a href="https://corpsewood.github.io/Corpsewood/" tabindex="0">Back to Corpsewood</a>
+</div>
 </body>
 </html>
