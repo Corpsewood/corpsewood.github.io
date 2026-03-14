@@ -112,11 +112,26 @@ h1 { font-size: 2.5em; margin-bottom: 50px; }
     text-shadow: 0 0 8px #00ff00, 0 0 16px #00ff00;
 }
 
-/* Added style for the Caesar cipher text */
+/* Caesar cipher text styling */
 .bottom-link span {
     margin-left: 15px;
     font-weight: bold;
-    color: #00ff00;
+    color: #000000; /* black */
+    text-shadow: 0 0 2px #000000;
+    animation: flicker 1.5s infinite;
+    font-family: "ComicSans", sans-serif;
+}
+
+/* Flicker animation for spooky effect */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 2px #000000;
+    }
+    20%, 22%, 24%, 55% {
+        opacity: 0.3;
+        text-shadow: 0 0 10px #111111;
+    }
 }
 </style>
 </head>
@@ -172,7 +187,7 @@ h1 { font-size: 2.5em; margin-bottom: 50px; }
 
 <!-- Ambient Sound -->
 <audio id="ambientSound" autoplay loop>
-    <source src="dragon-studio-creepy-industrial-sounds-ambience-482892.mp3" type="audio/mp3">
+    <source src="dragon-studio-creepy-industrial-sounds-ambience-482892.mp3" type="audio/mpeg">
 </audio>
 
 <script>
