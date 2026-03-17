@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Corpsewood File Dump</title>
 
+<meta name="description" content="A documentation about the place called 'Corpsewood', this website is runned by multible people.">
+
 <style>
 @font-face {
     font-family: "ComicSans";
@@ -33,6 +35,8 @@ body {
     background-size: cover;
     animation: fadeIn 0.8s ease-in-out, moveBackground 30s linear infinite;
     transition: background 0.3s ease-in-out;
+
+    will-change: background-position;
 }
 
 @keyframes fadeIn {
@@ -45,7 +49,13 @@ body {
     100% { background-position: 0 400px, center; }
 }
 
-h1 { font-size: 2.5em; margin-bottom: 50px; }
+h1 { font-size: 2.5em; margin-bottom: 10px; }
+
+.description {
+    font-size: 1em;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
 
 .box-container {
     display: flex;
@@ -112,99 +122,133 @@ h1 { font-size: 2.5em; margin-bottom: 50px; }
     text-shadow: 0 0 8px #00ff00, 0 0 16px #00ff00;
 }
 
-/* Caesar cipher text styling */
 .bottom-link span {
     margin-left: 15px;
     font-weight: bold;
-    color: #000000; /* black */
+    color: #000000;
     text-shadow: 0 0 2px #000000;
     animation: flicker 1.5s infinite;
-    font-family: "ComicSans", sans-serif;
 }
 
-/* Flicker animation for spooky effect */
 @keyframes flicker {
     0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
         opacity: 1;
-        text-shadow: 0 0 2px #000000;
     }
     20%, 22%, 24%, 55% {
         opacity: 0.3;
-        text-shadow: 0 0 10px #111111;
+    }
+}
+
+/* Mobile tweak */
+@media (max-width: 600px) {
+    .box {
+        width: 120px;
+        height: 120px;
+    }
+
+    h1 {
+        font-size: 1.8em;
     }
 }
 </style>
 </head>
+
 <body>
+
 <h1>Welcome to the file dump user called "345s"</h1>
+<div class="description">
+A documentation about the place called "Corpsewood", this website is runned by multible people.
+</div>
 
 <div class="box-container">
-    <!-- V1 Button -->
+
     <div>
         <a class="box-link" href="https://corpsewood.github.io/345s/">
             <div class="box" tabindex="0">
-                <img src="345s.png" alt="Open v1 page">
+                <img src="345s.png">
             </div>
         </a>
         <div class="box-text">V1</div>
     </div>
 
-    <!-- Contact Button -->
     <div>
         <a class="box-link" href="https://corpsewood.github.io/message/">
             <div class="box" tabindex="0">
-                <img src="message.png" alt="Open Contact page">
+                <img src="message.png">
             </div>
         </a>
         <div class="box-text">Contact</div>
     </div>
 
-    <!-- V2 Button -->
     <div>
         <a class="box-link" href="https://corpsewood.github.io/v2/">
             <div class="box" tabindex="0">
-                <img src="xhsx.png" alt="Open v2 page">
+                <img src="xhsx.png">
             </div>
         </a>
         <div class="box-text">V2</div>
     </div>
 
-    <!-- Info Button (Text Only) -->
     <div>
         <a class="box-link" href="https://corpsewood.github.io/Info/">
-            <div class="box" tabindex="0" style="display: flex; align-items: center; justify-content: center; font-size: 1.5em;">
+            <div class="box" tabindex="0" style="font-size: 1.5em;">
                 Info
             </div>
         </a>
         <div class="box-text">Info</div>
     </div>
+
 </div>
 
 <div class="bottom-link">
-    <a href="https://corpsewood.github.io/Corpsewood/" tabindex="0">Back to Corpsewood</a>
+    <a href="https://corpsewood.github.io/Corpsewood/">Back to Corpsewood</a>
     <span>IHDUIXO</span>
 </div>
 
-<!-- Ambient Sound -->
-<audio id="ambientSound" autoplay loop>
+<audio id="ambientSound" loop>
     <source src="dragon-studio-creepy-industrial-sounds-ambience-482892.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Smooth fade-in for ambient sound
 const ambient = document.getElementById('ambientSound');
-ambient.volume = 0; // start silent
+
+ambient.volume = 0;
+ambient.muted = true;
+
 ambient.play().then(() => {
+    ambient.muted = false;
+
     let vol = 0;
     const fadeIn = setInterval(() => {
-        if(vol < 0.2){
+        if (vol < 0.2) {
             vol += 0.01;
             ambient.volume = vol;
         } else {
             clearInterval(fadeIn);
         }
-    }, 100); // ~2 seconds fade-in
+    }, 100);
+
+}).catch(() => {
+    const startAudio = () => {
+        ambient.muted = false;
+        ambient.play();
+
+        let vol = 0;
+        const fadeIn = setInterval(() => {
+            if (vol < 0.2) {
+                vol += 0.01;
+                ambient.volume = vol;
+            } else {
+                clearInterval(fadeIn);
+            }
+        }, 100);
+
+        document.removeEventListener("click", startAudio);
+    };
+
+    document.addEventListener("click", startAudio);
 });
 </script>
+
 </body>
 </html>
