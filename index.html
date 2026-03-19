@@ -37,13 +37,11 @@ body::after {
     to { background-position: 0 100px; }
 }
 
-/* Terminal */
 .terminal {
     max-width: 800px;
     margin: auto;
 }
 
-/* Boot text */
 #bootText {
     white-space: pre-line;
     margin-bottom: 30px;
@@ -81,7 +79,6 @@ body::after {
     margin-bottom: 10px;
 }
 
-/* No image fallback */
 .no-image {
     border: 1px dashed #00ff88;
     padding: 30px;
@@ -101,7 +98,6 @@ body::after {
     background: rgba(0,255,136,0.1);
 }
 
-/* Footer */
 .footer {
     margin-top: 40px;
     opacity: 0.6;
@@ -138,6 +134,10 @@ body::after {
 > corpsewood.html
 </div>
 
+<div class="file" onclick="showPreview('booking.html',null,'https://corpsewoodbooking.github.io/')">
+> booking.html
+</div>
+
 </div>
 
 <!-- Preview -->
@@ -154,10 +154,6 @@ IHDUIXO
 </div>
 
 </div>
-
-<audio id="ambientSound" loop>
-    <source src="dragon-studio-creepy-industrial-sounds-ambience-482892.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 const bootText = document.getElementById("bootText");
@@ -220,33 +216,6 @@ function showPreview(name, img, url) {
 function openSelected() {
     window.location.href = selectedURL;
 }
-
-/* Audio */
-const ambient = document.getElementById('ambientSound');
-ambient.volume = 0;
-ambient.muted = true;
-
-function startAudio() {
-    ambient.muted = false;
-    ambient.play();
-
-    let vol = 0;
-    const fade = setInterval(() => {
-        if (vol < 0.2) {
-            vol += 0.01;
-            ambient.volume = vol;
-        } else {
-            clearInterval(fade);
-        }
-    }, 100);
-}
-
-ambient.play().then(startAudio).catch(() => {
-    document.addEventListener("click", function init() {
-        startAudio();
-        document.removeEventListener("click", init);
-    });
-});
 </script>
 
 </body>
