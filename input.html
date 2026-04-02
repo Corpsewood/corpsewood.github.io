@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>input</title>
+</head>
+<body>
+
+<input id="input" placeholder="type">
+<button onclick="go()">ok</button>
+
+<p id="out"></p>
+
+<script>
+function go() {
+  var raw = document.getElementById("input").value;
+  var input = btoa(unescape(encodeURIComponent(raw.toLowerCase()))); // base64-safe for unicode
+  var r = "";
+
+  var data = {
+    "aGVsbG8=": "aGk=",
+    "dGVzdA==": "b2s=",
+    "Ynll": "Ynll",
+    "bnVsbA==": "eW91IGRpZG50IGRlc2VydmUgaXQu",
+    "ZGVlcA==": "c29tZSBzb3J0IG9mIGNyZWF0dXJlLCB1bmtub3duIHNwZWNpZXMu",
+    "ZmF0ZQ==": "SWwgdHVvIGRlc3Rpbm8gbm9uIGVzaXN0ZSwgaWwgdHVvIHNjb3BvIG5vbiDDqCBudWxsYS4=",
+    "Y29ycHNld29vZA==": "ZG9udCBnbyBoZXJlLCBpbSB0cnlpbmcgdG8gaW52ZXN0aWdhdGUgdGhpcyBwbGFjZS4=",
+    "Z29k": "dGhlc2UgYXJlbnQgYWxsb3dlZCBhdCB0aGlzIHBsYWNlIHJpZ2h0IG5vdywgc29tZXRoaW5nIGlzIGhlcmUu",
+    "b2xkIHdpbmQ=": "ZWF0IGVhdCBlYXQgZWF0IGVhdCBlYXQgZWF0IGVhdCBlYXQgZWF0IGVhdA==",
+    "Y3Jvd2F0ZXI=": "dGhpcyBpc250IGhhbGxvd2VlbiBzdG9wIGl0Lg==",
+    "ZGFk": "V2h5IGRvIHUgd29yayBoZXJlPyBpcyBteSBxdWVzdGlvbiBjYXVzZSB1IGRvbnQgZGVzZXJ2ZSB0byB3b3JrIGhlcmUu",
+    "dmlsbA==": "eW91ciBub3QgZ3JhbnRlZCBmb3IgYWNlc3MgdG8gdGhpcyBkYW5nZXJvdXMgcGxhY2UgYW55bW9yZSwgdGhpcyBuZWVkcyB0byBiZSBzaHV0IGRvd24u",
+    "emVhdGg=": "c2lnaCBhbm90aGVyIGNhbXBlciwgd2lsbCB0aGlzIG5pZ2h0bWFyZSBldmVyIGVuZD8=",
+    "cGxlYXpl": "YXcuIHlvdXIgY3J5aW5nLCBndWVzcyB3aGF0IGkgZG9udCBjYXJlIGF0IGFsbC4gaXRzIG5vdCBsaWtlIGkgaGF2ZSBhIGhlYXJ0Lg==",
+    "dGhlIGltYWdpbmF0aW9u": "d2h5IGFyZSB1IGp1c3QgaGVyZT8gYW5kIHN0b3Agc2NyZWFtaW5nIHBsZWFzZQ==",
+    "MzQ1": "ZGFk"
+  };
+
+  if (data[input]) {
+    try {
+      r = decodeURIComponent(escape(atob(data[input]))); // safe unicode decode
+    } catch(e) {
+      r = '[error decoding]';
+    }
+  } else if (raw.toLowerCase().startsWith("im")) {
+    r = "Are you really?";
+  } else if (raw === "345") {
+    r = "daed";
+  } else {
+    r = '"' + raw + '" was not recognised';
+  }
+
+  document.getElementById("out").innerText = r;
+}
+</script>
+
+</body>
+</html>
