@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>235432895</title>
+<title>Archive</title>
 
 <style>
 body {
@@ -95,9 +95,14 @@ body {
         SUBJECT<br>NULL
     </div>
 
-    <!-- 🔥 NEW CHAPTER 1 NOTE -->
+    <!-- CHAPTER 1 NOTE -->
     <div class="paperNote" style="top:50%; left:15%;" onclick="openPaper('chapter1')">
         FILE<br>CHAPTER_1
+    </div>
+
+    <!-- NEW INPUT FILE NOTE -->
+    <div class="paperNote" style="top:40%; left:80%;" onclick="openPaper('inputFile')">
+        FILE<br>INPUT
     </div>
 
 </div>
@@ -164,14 +169,25 @@ function openPaper(type) {
         `;
     }
 
-    /* 🔥 CHAPTER 1 LOGIC */
     if(type === "chapter1") {
         html = `
         <h3>FILE: CHAPTER 1</h3>
         <p>Status: Accessible</p>
         <p>Origin unclear</p>
 
-        <div class="link" onclick="openChapter()">
+        <div class="link" onclick="openChapter1()">
+        → Open File
+        </div>
+        `;
+    }
+
+    if(type === "inputFile") {
+        html = `
+        <h3>FILE: INPUT</h3>
+        <p>Status: ready</p>
+        <p>Click below to open the input page.</p>
+
+        <div class="link" onclick="openInput()">
         → Open File
         </div>
         `;
@@ -184,13 +200,17 @@ function openPaper(type) {
     }
 }
 
-/* 🔥 REDIRECT */
-function openChapter() {
+function closePaper() {
+    document.getElementById("paperView").style.display = "none";
+}
+
+/* REDIRECT FUNCTIONS */
+function openChapter1() {
     window.location.href = "https://corpsewood.github.io/chapter1.html";
 }
 
-function closePaper() {
-    document.getElementById("paperView").style.display = "none";
+function openInput() {
+    window.location.href = "https://corpsewood.github.io/input.html";
 }
 </script>
 
