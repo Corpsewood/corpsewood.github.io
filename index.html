@@ -12,6 +12,7 @@ body {
     font-family: "Courier New", monospace;
 }
 
+/* BOARD */
 #board {
     width: 100vw;
     height: 100vh;
@@ -21,6 +22,7 @@ body {
     position: relative;
 }
 
+/* PAPER NOTES */
 .paperNote {
     position: absolute;
     width: 160px;
@@ -36,6 +38,7 @@ body {
     transform: scale(1.03) rotate(0deg);
 }
 
+/* BIG VIEW */
 #paperView {
     position: fixed;
     top: 50%;
@@ -70,6 +73,7 @@ body {
 
 <div id="board">
 
+    <!-- ALL YOUR ORIGINAL NOTES KEPT -->
     <div class="paperNote" style="top:20%; left:25%;" onclick="openPaper('daed')">
         RANGER LOG<br>345
     </div>
@@ -90,18 +94,18 @@ body {
         FILE<br>CHAPTER_1
     </div>
 
-    <!-- INPUT (UNCHANGED) -->
     <div class="paperNote" style="top:40%; left:80%;" onclick="openPaper('inputFile')">
         FILE<br>INPUT
     </div>
 
-    <!-- VWDD (FIXED POSITION) -->
+    <!-- VWDD ADDED (ONLY ADDITION) -->
     <div class="paperNote" style="top:15%; left:85%;" onclick="openPaper('vwdd')">
         FILE<br>vwdd
     </div>
 
 </div>
 
+<!-- MODAL -->
 <div id="paperView">
     <div id="close" onclick="closePaper()">✕</div>
     <div id="content"></div>
@@ -120,42 +124,64 @@ function openPaper(type) {
 
     if(type === "daed") {
         discovered.daed = true;
-        html = `<h3>RANGER LOG – 345</h3><p>I hear it again.</p>`;
+        html = `
+        <h3>RANGER LOG – 345</h3>
+        <p>I hear it again.</p>
+        <p>It’s not wind.</p>
+        <p>I shouldn’t have let Fiv in.</p>
+        `;
     }
 
     if(type === "fiv") {
         discovered.fiv = true;
-        html = `<h3>USER FILE: FIV</h3><p>Access granted.</p>`;
+        html = `
+        <h3>USER FILE: FIV</h3>
+        <p>Access granted by User 345</p>
+        <p>Experiment conducted</p>
+        <p>Subject: Null</p>
+        `;
     }
 
     if(type === "corpsewood") {
-        html = `<h3>CORPSEWOOD</h3><p>Status: Restricted</p>`;
+        html = `
+        <h3>LOCATION: CORPSEWOOD</h3>
+        <p>Status: Restricted</p>
+        <p>Multiple incidents reported</p>
+        `;
     }
 
     if(type === "null") {
-        html = `<h3>NULL</h3><p>Status: Unstable</p>`;
+        html = `
+        <h3>SUBJECT: NULL</h3>
+        <p>Status: Unstable</p>
+        <p>Decomposition observed</p>
+        `;
     }
 
     if(type === "chapter1") {
         html = `
-        <h3>CHAPTER 1</h3>
+        <h3>FILE: CHAPTER 1</h3>
         <div class="link" onclick="openChapter1()">→ Open File</div>
         `;
     }
 
     if(type === "inputFile") {
         html = `
-        <h3>INPUT FILE</h3>
+        <h3>FILE: INPUT</h3>
         <div class="link" onclick="openInput()">→ Open File</div>
         `;
     }
 
-    /* ✅ FIXED VWDD */
+    /* ONLY NEW FIX */
     if(type === "vwdd") {
         html = `
-        <h3>VWDD</h3>
+        <h3>FILE: VWDD</h3>
         <p>Status: Corrupted</p>
-        <div class="link" onclick="openvwdd()">→ Open File</div>
+        <p>Access unstable</p>
+
+        <div class="link" onclick="openvwdd()">
+            → Attempt Access
+        </div>
         `;
     }
 
@@ -170,7 +196,7 @@ function closePaper() {
     document.getElementById("paperView").style.display = "none";
 }
 
-/* unchanged redirects */
+/* redirects */
 function openChapter1() {
     window.location.href = "https://corpsewood.github.io/chapter1.html";
 }
@@ -179,7 +205,6 @@ function openInput() {
     window.location.href = "https://corpsewood.github.io/input.html";
 }
 
-/* ✅ FIXED VWDD REDIRECT */
 function openvwdd() {
     window.location.href = "https://corpsewood.github.io/vwdd.html";
 }
