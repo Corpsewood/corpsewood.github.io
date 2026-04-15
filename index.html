@@ -22,7 +22,7 @@ body {
     position: relative;
 }
 
-/* SMALL PAPERS ON BOARD */
+/* NOTES */
 .paperNote {
     position: absolute;
     width: 160px;
@@ -38,7 +38,7 @@ body {
     transform: scale(1.03) rotate(0deg);
 }
 
-/* BIG PAPER VIEW */
+/* MODAL */
 #paperView {
     position: fixed;
     top: 50%;
@@ -53,7 +53,6 @@ body {
     border: 1px solid #c9b89c;
 }
 
-/* CLOSE */
 #close {
     position: absolute;
     top: 8px;
@@ -61,7 +60,6 @@ body {
     cursor: pointer;
 }
 
-/* LINKS */
 .link {
     display: inline-block;
     margin-top: 15px;
@@ -75,12 +73,12 @@ body {
 
 <div id="board">
 
-    <!-- DAED NOTE -->
+    <!-- DAED -->
     <div class="paperNote" style="top:20%; left:25%;" onclick="openPaper('daed')">
         RANGER LOG<br>345
     </div>
 
-    <!-- FIV NOTE -->
+    <!-- FIV -->
     <div class="paperNote" style="top:35%; left:65%;" onclick="openPaper('fiv')">
         USER FILE<br>FIV
     </div>
@@ -100,19 +98,19 @@ body {
         FILE<br>CHAPTER_1
     </div>
 
-    <!-- INPUT FILE -->
+    <!-- INPUT -->
     <div class="paperNote" style="top:40%; left:80%;" onclick="openPaper('inputFile')">
         FILE<br>INPUT
     </div>
 
-    <!-- VWDD (ADDED ONLY, NOTHING REMOVED) -->
+    <!-- VWDD -->
     <div class="paperNote" style="top:15%; left:85%;" onclick="openPaper('vwdd')">
         FILE<br>vwdd
     </div>
 
 </div>
 
-<!-- BIG PAPER -->
+<!-- MODAL -->
 <div id="paperView">
     <div id="close" onclick="closePaper()">✕</div>
     <div id="content"></div>
@@ -176,18 +174,16 @@ function openPaper(type) {
     if(type === "inputFile") {
         html = `
         <h3>FILE: INPUT</h3>
-        <p>Status: ready</p>
+        <p>Status: Unstable</p>
         <div class="link" onclick="openInput()">→ Open File</div>
         `;
     }
 
-    /* ✅ ONLY ADDITION: VWDD FIX */
     if(type === "vwdd") {
         html = `
         <h3>FILE: VWDD</h3>
         <p>Status: Corrupted</p>
         <p>Access unstable</p>
-
         <div class="link" onclick="openvwdd()">→ Attempt Access</div>
         `;
     }
@@ -203,7 +199,6 @@ function closePaper() {
     document.getElementById("paperView").style.display = "none";
 }
 
-/* REDIRECTS */
 function openChapter1() {
     window.location.href = "https://corpsewood.github.io/chapter1.html";
 }
