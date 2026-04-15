@@ -90,11 +90,12 @@ body {
         FILE<br>CHAPTER_1
     </div>
 
+    <!-- INPUT (UNCHANGED) -->
     <div class="paperNote" style="top:40%; left:80%;" onclick="openPaper('inputFile')">
         FILE<br>INPUT
     </div>
 
-    <!-- VWDD FIXED POSITION -->
+    <!-- VWDD (FIXED POSITION) -->
     <div class="paperNote" style="top:15%; left:85%;" onclick="openPaper('vwdd')">
         FILE<br>vwdd
     </div>
@@ -119,61 +120,42 @@ function openPaper(type) {
 
     if(type === "daed") {
         discovered.daed = true;
-        html = `
-        <h3>RANGER LOG – 345</h3>
-        <p>I hear it again.</p>
-        <p>It’s not wind.</p>
-        <p>I shouldn’t have let Fiv in.</p>
-        `;
+        html = `<h3>RANGER LOG – 345</h3><p>I hear it again.</p>`;
     }
 
     if(type === "fiv") {
         discovered.fiv = true;
-        html = `
-        <h3>USER FILE: FIV</h3>
-        <p>Access granted by User 345</p>
-        <p>Experiment conducted</p>
-        <p>Subject: Null</p>
-        `;
+        html = `<h3>USER FILE: FIV</h3><p>Access granted.</p>`;
     }
 
     if(type === "corpsewood") {
-        html = `
-        <h3>LOCATION: CORPSEWOOD</h3>
-        <p>Status: Restricted</p>
-        <p>Multiple incidents reported</p>
-        `;
+        html = `<h3>CORPSEWOOD</h3><p>Status: Restricted</p>`;
     }
 
     if(type === "null") {
-        html = `
-        <h3>SUBJECT: NULL</h3>
-        <p>Status: Unstable</p>
-        <p>Decomposition observed</p>
-        `;
+        html = `<h3>NULL</h3><p>Status: Unstable</p>`;
     }
 
     if(type === "chapter1") {
         html = `
-        <h3>FILE: CHAPTER 1</h3>
-        <p>Status: Accessible</p>
+        <h3>CHAPTER 1</h3>
         <div class="link" onclick="openChapter1()">→ Open File</div>
         `;
     }
 
     if(type === "inputFile") {
         html = `
-        <h3>FILE: INPUT</h3>
+        <h3>INPUT FILE</h3>
         <div class="link" onclick="openInput()">→ Open File</div>
         `;
     }
 
+    /* ✅ FIXED VWDD */
     if(type === "vwdd") {
         html = `
-        <h3>FILE: VWDD</h3>
+        <h3>VWDD</h3>
         <p>Status: Corrupted</p>
-        <p>Access unstable</p>
-        <div class="link" onclick="openvwdd()">→ Attempt Access</div>
+        <div class="link" onclick="openvwdd()">→ Open File</div>
         `;
     }
 
@@ -188,6 +170,7 @@ function closePaper() {
     document.getElementById("paperView").style.display = "none";
 }
 
+/* unchanged redirects */
 function openChapter1() {
     window.location.href = "https://corpsewood.github.io/chapter1.html";
 }
@@ -196,6 +179,7 @@ function openInput() {
     window.location.href = "https://corpsewood.github.io/input.html";
 }
 
+/* ✅ FIXED VWDD REDIRECT */
 function openvwdd() {
     window.location.href = "https://corpsewood.github.io/vwdd.html";
 }
