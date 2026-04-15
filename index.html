@@ -22,7 +22,7 @@ body {
     position: relative;
 }
 
-/* PAPER NOTES */
+/* SMALL PAPERS ON BOARD */
 .paperNote {
     position: absolute;
     width: 160px;
@@ -38,7 +38,7 @@ body {
     transform: scale(1.03) rotate(0deg);
 }
 
-/* BIG VIEW */
+/* BIG PAPER VIEW */
 #paperView {
     position: fixed;
     top: 50%;
@@ -53,6 +53,7 @@ body {
     border: 1px solid #c9b89c;
 }
 
+/* CLOSE */
 #close {
     position: absolute;
     top: 8px;
@@ -60,6 +61,7 @@ body {
     cursor: pointer;
 }
 
+/* LINKS */
 .link {
     display: inline-block;
     margin-top: 15px;
@@ -73,39 +75,44 @@ body {
 
 <div id="board">
 
-    <!-- ALL YOUR ORIGINAL NOTES KEPT -->
+    <!-- DAED NOTE -->
     <div class="paperNote" style="top:20%; left:25%;" onclick="openPaper('daed')">
         RANGER LOG<br>345
     </div>
 
+    <!-- FIV NOTE -->
     <div class="paperNote" style="top:35%; left:65%;" onclick="openPaper('fiv')">
         USER FILE<br>FIV
     </div>
 
+    <!-- CORPSEWOOD -->
     <div class="paperNote" style="top:60%; left:50%;" onclick="openPaper('corpsewood')">
         CORPSEWOOD<br><i>RESTRICTED</i>
     </div>
 
+    <!-- NULL -->
     <div id="nullNote" class="paperNote" style="top:75%; left:30%; display:none;" onclick="openPaper('null')">
         SUBJECT<br>NULL
     </div>
 
+    <!-- CHAPTER 1 -->
     <div class="paperNote" style="top:50%; left:15%;" onclick="openPaper('chapter1')">
         FILE<br>CHAPTER_1
     </div>
 
+    <!-- INPUT FILE -->
     <div class="paperNote" style="top:40%; left:80%;" onclick="openPaper('inputFile')">
         FILE<br>INPUT
     </div>
 
-    <!-- VWDD ADDED (ONLY ADDITION) -->
+    <!-- VWDD (ADDED ONLY, NOTHING REMOVED) -->
     <div class="paperNote" style="top:15%; left:85%;" onclick="openPaper('vwdd')">
         FILE<br>vwdd
     </div>
 
 </div>
 
-<!-- MODAL -->
+<!-- BIG PAPER -->
 <div id="paperView">
     <div id="close" onclick="closePaper()">✕</div>
     <div id="content"></div>
@@ -161,6 +168,7 @@ function openPaper(type) {
     if(type === "chapter1") {
         html = `
         <h3>FILE: CHAPTER 1</h3>
+        <p>Status: Accessible</p>
         <div class="link" onclick="openChapter1()">→ Open File</div>
         `;
     }
@@ -168,20 +176,19 @@ function openPaper(type) {
     if(type === "inputFile") {
         html = `
         <h3>FILE: INPUT</h3>
+        <p>Status: ready</p>
         <div class="link" onclick="openInput()">→ Open File</div>
         `;
     }
 
-    /* ONLY NEW FIX */
+    /* ✅ ONLY ADDITION: VWDD FIX */
     if(type === "vwdd") {
         html = `
         <h3>FILE: VWDD</h3>
         <p>Status: Corrupted</p>
         <p>Access unstable</p>
 
-        <div class="link" onclick="openvwdd()">
-            → Attempt Access
-        </div>
+        <div class="link" onclick="openvwdd()">→ Attempt Access</div>
         `;
     }
 
@@ -196,7 +203,7 @@ function closePaper() {
     document.getElementById("paperView").style.display = "none";
 }
 
-/* redirects */
+/* REDIRECTS */
 function openChapter1() {
     window.location.href = "https://corpsewood.github.io/chapter1.html";
 }
