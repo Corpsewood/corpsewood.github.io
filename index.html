@@ -1,216 +1,248 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Archive</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>345s</title>
 
-<style>
-body {
-    margin: 0;
-    overflow: hidden;
-    background: black;
-    font-family: "Courier New", monospace;
-}
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: "Times New Roman", monospace;
+      background: black;
+      color: white;
+    }
 
-/* BOARD */
-#board {
-    width: 100vw;
-    height: 100vh;
-    background-image: url('https://file.garden/Z9xGnXpf6B5_2o1b/ekaterina-novitskaya-KugwNl9jX1Q-unsplash.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-}
+    /* BACKGROUND */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url('https://corpsewood.github.io/FREE_background_video_loop_decent_animated_grey_smoke_background.gif')
+        no-repeat center center;
+      background-size: 150% 150%;
+      animation: slowZoom 20s ease-in-out infinite alternate;
+      z-index: 0;
+    }
 
-/* NOTES */
-.paperNote {
-    position: absolute;
-    width: 160px;
-    padding: 10px;
-    background: #f5ecd7;
-    border: 1px solid #c9b89c;
-    box-shadow: 3px 3px 12px rgba(0,0,0,0.8);
-    cursor: pointer;
-    transform: rotate(-2deg);
-}
+    @keyframes slowZoom {
+      from { transform: scale(1.05); }
+      to { transform: scale(1.2); }
+    }
 
-.paperNote:hover {
-    transform: scale(1.03) rotate(0deg);
-}
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.9), rgba(0,0,0,1));
+      z-index: 1;
+    }
 
-/* MODAL */
-#paperView {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-1deg);
-    width: 520px;
-    padding: 25px;
-    background: #f5ecd7;
-    color: #111;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.9);
-    display: none;
-    border: 1px solid #c9b89c;
-}
+    /* LOGO */
+    .logo {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      cursor: pointer;
+    }
 
-#close {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    cursor: pointer;
-}
+    .logo img {
+      width: 140px;
+    }
 
-.link {
-    display: inline-block;
-    margin-top: 15px;
-    border-bottom: 1px solid black;
-    cursor: pointer;
-}
-</style>
+    /* CODE GATE */
+    .gate {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: rgba(0,0,0,0.92);
+      z-index: 20;
+    }
+
+    .gate.active {
+      display: flex;
+    }
+
+    input {
+      background: black;
+      border: 1px solid white;
+      color: white;
+      padding: 12px;
+      font-size: 18px;
+      text-align: center;
+      letter-spacing: 5px;
+      outline: none;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .msg {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* FLASH */
+    .flash {
+      position: fixed;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 30;
+    }
+
+    .flash.active {
+      animation: flash 0.3s ease;
+    }
+
+    @keyframes flash {
+      0% { opacity: 0; }
+      20% { opacity: 0.6; }
+      100% { opacity: 0; }
+    }
+
+    /* SHAKE */
+    .shake {
+      animation: shake 0.25s;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0); }
+      25% { transform: translate(3px, -2px); }
+      50% { transform: translate(-3px, 2px); }
+      75% { transform: translate(2px, 2px); }
+      100% { transform: translate(0); }
+    }
+
+    /* MAIN */
+    .wrap {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .chapters {
+      margin-top: 30px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .chapter {
+      max-width: 125px;
+      background: white;
+      color: black;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .chapter:hover {
+      filter: invert(100%);
+      transform: scale(1.05);
+    }
+
+    .chapter a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="bg"></div>
+  <div class="overlay"></div>
 
-<div id="board">
+  <!-- LOGO -->
+  <div class="logo" id="logo">
+    <img src="https://corpsewood.github.io/logo.png" />
+  </div>
 
-    <!-- DAED -->
-    <div class="paperNote" style="top:20%; left:25%;" onclick="openPaper('daed')">
-        RANGER LOG<br>345
+  <!-- FLASH -->
+  <div class="flash" id="flash"></div>
+
+  <!-- CODE GATE -->
+  <div class="gate" id="gate">
+    <input id="codeInput" placeholder="ENTER CODE" />
+    <button onclick="checkCode()">ENTER</button>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="wrap">
+    <p>missed</p>
+
+    <div class="chapters">
+      <div class="chapter">
+        <a href="https://corpsewood.github.io/Aditus.html">
+          <img src="https://corpsewood.github.io/345s.png" width="125" />
+          <p>Aditus</p>
+        </a>
+      </div>
     </div>
+  </div>
 
-    <!-- FIV -->
-    <div class="paperNote" style="top:35%; left:65%;" onclick="openPaper('fiv')">
-        USER FILE<br>FIV
-    </div>
+  <script>
+    const logo = document.getElementById("logo");
+    const gate = document.getElementById("gate");
+    const msg = document.getElementById("msg");
+    const flash = document.getElementById("flash");
+    const input = document.getElementById("codeInput");
 
-    <!-- CORPSEWOOD -->
-    <div class="paperNote" style="top:60%; left:50%;" onclick="openPaper('corpsewood')">
-        CORPSEWOOD<br><i>RESTRICTED</i>
-    </div>
+    // Base64 encoded "404124"
+    const realCode = atob("NDA0MTI0");
 
-    <!-- NULL -->
-    <div id="nullNote" class="paperNote" style="top:75%; left:30%; display:none;" onclick="openPaper('null')">
-        SUBJECT<br>NULL
-    </div>
+    logo.addEventListener("click", () => {
+      gate.classList.add("active");
+      input.focus();
+    });
 
-    <!-- CHAPTER 1 -->
-    <div class="paperNote" style="top:50%; left:15%;" onclick="openPaper('chapter1')">
-        FILE<br>CHAPTER_1
-    </div>
-
-    <!-- INPUT -->
-    <div class="paperNote" style="top:40%; left:80%;" onclick="openPaper('inputFile')">
-        FILE<br>INPUT
-    </div>
-
-    <!-- VWDD -->
-    <div class="paperNote" style="top:15%; left:85%;" onclick="openPaper('vwdd')">
-        FILE<br>vwdd
-    </div>
-
-</div>
-
-<!-- MODAL -->
-<div id="paperView">
-    <div id="close" onclick="closePaper()">✕</div>
-    <div id="content"></div>
-</div>
-
-<script>
-let discovered = {
-    daed: false,
-    fiv: false
-};
-
-function openPaper(type) {
-    document.getElementById("paperView").style.display = "block";
-
-    let html = "";
-
-    if(type === "daed") {
-        discovered.daed = true;
-        html = `
-        <h3>RANGER LOG – 345</h3>
-        <p>I hear it again.</p>
-        <p>It’s not wind.</p>
-        <p>I shouldn’t have let Fiv in.</p>
-        `;
+    function triggerFlash() {
+      flash.classList.remove("active");
+      void flash.offsetWidth;
+      flash.classList.add("active");
     }
 
-    if(type === "fiv") {
-        discovered.fiv = true;
-        html = `
-        <h3>USER FILE: FIV</h3>
-        <p>Access granted by User 345</p>
-        <p>Experiment conducted</p>
-        <p>Subject: Null</p>
-        `;
+    function shakeScreen() {
+      document.body.classList.add("shake");
+      setTimeout(() => document.body.classList.remove("shake"), 250);
     }
 
-    if(type === "corpsewood") {
-        html = `
-        <h3>LOCATION: CORPSEWOOD</h3>
-        <p>Status: Restricted</p>
-        <p>Multiple incidents reported</p>
-        `;
+    function checkCode() {
+      const val = input.value;
+
+      if (val === realCode) {
+        msg.textContent = "ACCESS GRANTED";
+        triggerFlash();
+
+        setTimeout(() => {
+          window.location.href = "https://corpsewood.github.io/input.html";
+        }, 800);
+
+      } else {
+        msg.textContent = "ACCESS DENIED";
+        shakeScreen();
+        triggerFlash();
+        input.value = "";
+      }
     }
-
-    if(type === "null") {
-        html = `
-        <h3>SUBJECT: NULL</h3>
-        <p>Status: Unstable</p>
-        <p>Decomposition observed</p>
-        `;
-    }
-
-    if(type === "chapter1") {
-        html = `
-        <h3>FILE: CHAPTER 1</h3>
-        <p>Status: Accessible</p>
-        <div class="link" onclick="openChapter1()">→ Open File</div>
-        `;
-    }
-
-    if(type === "inputFile") {
-        html = `
-        <h3>FILE: INPUT</h3>
-        <p>Status: Unstable</p>
-        <div class="link" onclick="openInput()">→ Open File</div>
-        `;
-    }
-
-    if(type === "vwdd") {
-        html = `
-        <h3>FILE: VWDD</h3>
-        <p>Status: Corrupted</p>
-        <p>Access unstable</p>
-        <div class="link" onclick="openvwdd()">→ Attempt Access</div>
-        `;
-    }
-
-    document.getElementById("content").innerHTML = html;
-
-    if(discovered.daed && discovered.fiv) {
-        document.getElementById("nullNote").style.display = "block";
-    }
-}
-
-function closePaper() {
-    document.getElementById("paperView").style.display = "none";
-}
-
-function openChapter1() {
-    window.location.href = "https://corpsewood.github.io/chapter1.html";
-}
-
-function openInput() {
-    window.location.href = "https://corpsewood.github.io/input.html";
-}
-
-function openvwdd() {
-    window.location.href = "https://corpsewood.github.io/vwdd.html";
-}
-</script>
-
+  </script>
 </body>
 </html>
