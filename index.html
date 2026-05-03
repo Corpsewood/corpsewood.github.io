@@ -143,6 +143,7 @@
       display: flex;
       gap: 30px;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .chapter {
@@ -190,12 +191,96 @@
     <p>missed</p>
 
     <div class="chapters">
+      <!-- Chapter 1 -->
       <div class="chapter">
         <a href="https://corpsewood.github.io/Aditus.html">
           <img src="https://corpsewood.github.io/345s.png" width="125" />
           <p>Aditus</p>
         </a>
       </div>
+
+      <!-- Chapter 2 -->
+      <div class="chapter">
+        <a href="https://corpsewood.github.io/Aberratio.html">
+          <img src="https://corpsewood.github.io/xhsx.png" width="125" />
+          <p>Aberratio</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const logo = document.getElementById("logo");
+    const gate = document.getElementById("gate");
+    const msg = document.getElementById("msg");
+    const flash = document.getElementById("flash");
+    const input = document.getElementById("codeInput");
+
+    // Base64 encoded "404124"
+    const realCode = atob("NDA0MTI0");
+
+    logo.addEventListener("click", () => {
+      gate.classList.add("active");
+      input.focus();
+    });
+
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") checkCode();
+    });
+
+    function triggerFlash() {
+      flash.classList.remove("active");
+      void flash.offsetWidth;
+      flash.classList.add("active");
+    }
+
+    function shakeScreen() {
+      document.body.classList.add("shake");
+      setTimeout(() => document.body.classList.remove("shake"), 250);
+    }
+
+    function checkCode() {
+      const val = input.value;
+
+      if (val === realCode) {
+        msg.textContent = "ACCESS GRANTED";
+        triggerFlash();
+
+        setTimeout(() => {
+          window.location.href = "https://corpsewood.github.io/input.html";
+        }, 800);
+
+      } else {
+        msg.textContent = "ACCESS DENIED";
+        shakeScreen();
+        triggerFlash();
+        input.value = "";
+      }
+    }
+  </script>
+</body>
+</html>
+  <!-- MAIN CONTENT -->
+  <div class="wrap">
+    <p>missed</p>
+
+<div class="chapters">
+  <!-- Chapter 1 -->
+  <div class="chapter">
+    <a href="https://corpsewood.github.io/Aditus.html">
+      <img src="https://corpsewood.github.io/345s.png" width="125" />
+      <p>Aditus</p>
+    </a>
+  </div>
+
+  <!-- Chapter 2 -->
+  <div class="chapter">
+    <a href="https://corpsewood.github.io/Aberratio.html">
+      <img src="https://corpsewood.github.io/345s.png" width="125" />
+      <p>Aberratio</p>
+    </a>
+  </div>
+</div>
     </div>
   </div>
 
